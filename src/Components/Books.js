@@ -26,7 +26,7 @@ class Books extends Component{
 							</div>
 							<div className="db">
 								<div className="w-75 w-25-s pa1 pb0 ">
-								  <button className="deleteButton ml7 ml5-m ml0-s">-</button>
+								  <button className="deleteButton ml7 ml6-m ml0-s">-</button>
 								  <p>{productName[i]}</p>
 								</div>
 								<div className='w-100 w-25-s f6 mid-gray pa1 pt0'>
