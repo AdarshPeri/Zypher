@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Table from './Components/Table';
 import Books from './Components/Books';
 
-
-
 class App extends Component {
 	constructor(){
 		super();
@@ -12,7 +10,6 @@ class App extends Component {
 			themes: [],
 			route: 'home',			
 		}
-
 	}
 
 	componentDidMount() {
@@ -25,11 +22,15 @@ class App extends Component {
 	};
 
 	onRouteChange = (theme) =>{
-	if(theme !== 'home'){
-	this.setState({route:theme})	
+	if(theme !== 'home')
+	{
+	 this.setState({route:theme})	
+ 	}
+ 	else
+ 	{
+ 	 this.setState({route:'home'})
  	}
     };
-
 
 	render() {
 		const {themes, route} = this.state;
@@ -38,12 +39,10 @@ class App extends Component {
 		{
 		route === 'home' 
 		?<Table themes = {themes} onRouteChange={this.onRouteChange}/>
-		:<Books themes = {themes} route={route} />	
+		:<Books themes = {themes} route={route} onRouteChange={this.onRouteChange} />	
 		}
 		</div>
 		)
-
 	}
-
 }
 export default App;
