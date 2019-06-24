@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Table from './Components/Table';
+import Books from './Components/Books';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends Component {
+	constructor(){
+		super();
+		this.state= {
+			list: {},
+			themes: [],
+			route: 'home',			
+		}
+
+	}
+
+	componentDidMount() {
+		fetch('https://newprod.zypher.co/admin/themes/getAllThemes')
+			 .then(response => response.json()) 
+			 .then(list => {this.setState({list, 
+			 	  themes: list.themes
+			 	  })
+			 });			
+	};
+
+	onRouteChange = (theme) =>{
+	if(theme !== 'home'){
+	this.setState({route:theme})	
+ 	}
+    };
+
+
+	render() {
+		const {themes, route} = this.state;
+		return(
+		<div>
+		{
+		route === 'home' 
+		?<Table themes = {themes} onRouteChange={this.onRouteChange}/>
+		:<Books themes = {themes} route={route} />	
+		}
+		</div>
+		)
+
+	}
+
 }
-
 export default App;
